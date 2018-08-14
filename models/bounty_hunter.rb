@@ -59,7 +59,9 @@ class BountyHunter
     db.prepare("find_by_id", sql)
     target = db.exec_prepared("find_by_id", values)
     db.close()
-    return target.map { |bounty| BountyHunter.new(bounty)}
+    target_array = target.map { |bounty| BountyHunter.new(bounty)}
+    return nil if target_array.length == 0
+    return target_array[0]
   end
 
   def BountyHunter.find_by_name(name)
@@ -69,7 +71,9 @@ class BountyHunter
     db.prepare("find_by_name", sql)
     target = db.exec_prepared("find_by_name", values)
     db.close()
-    return target.map { |bounty| BountyHunter.new(bounty)}
+    target_array = target.map { |bounty| BountyHunter.new(bounty)}
+    return nil if target_array.length == 0
+    return target_array[0]
   end
 
   def BountyHunter.all()
